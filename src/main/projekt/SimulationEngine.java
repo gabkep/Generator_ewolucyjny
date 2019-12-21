@@ -11,7 +11,7 @@ public class SimulationEngine implements ActionListener{
     private WorldMap map;
     public JFrame frame;
     private MapVisualisation mapVisualisation;
-    private StatsPanel statsPanel;
+    public StatsPanel statsPanel;
     public Timer timer;
     public boolean isStopped;
 

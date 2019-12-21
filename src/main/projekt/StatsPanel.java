@@ -9,10 +9,12 @@ import java.util.Iterator;
 public class StatsPanel extends JPanel{
     private WorldMap map;
     private SimulationEngine simulationEngine;
+    public Animal trackedAnimal;
 
     public StatsPanel(WorldMap map, SimulationEngine simulationEngine) {
         this.map = map;
         this.simulationEngine = simulationEngine;
+        this.trackedAnimal = null;
     }
 
     @Override
@@ -53,5 +55,15 @@ public class StatsPanel extends JPanel{
                 else simulationEngine.pause();
             }
         });
+
+        if (trackedAnimal != null) {
+            g.drawString("Liczba wszystkich dzieci: "+trackedAnimal.childrenCount,10, 230);
+            g.drawString("Liczba wszystkich potomków: to be done", 10, 260);
+            if (trackedAnimal.dayOfDeath != -1) {
+                g.drawString("Dzień śmierci: "+ trackedAnimal.dayOfDeath,10, 290);
+            }
+        }
+
     }
+
 }

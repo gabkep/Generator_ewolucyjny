@@ -7,7 +7,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         int startingAnimals = Integer.parseInt(args[0]);
-        int numOfSimulations = Integer.parseInt(args[1]);
+        int numOfSimulations = 1;
         int delay = Integer.parseInt(args[2]);
         if (numOfSimulations == 1) {
             try {

@@ -51,6 +51,8 @@ public class WorldMap implements IPositionChangeObserver {
         this.animals = new HashMap<>();
         this.plants = new HashMap<>();
 
+        if (startingAnimals > mapArea)
+            startingAnimals = mapArea;
         Random rnd = new Random();
         while (startingAnimals > 0) {
             Vector2d position;
@@ -254,7 +256,7 @@ public class WorldMap implements IPositionChangeObserver {
             return true;
     }
 
-    private Integer positionNumber(Vector2d position)
+    public Integer positionNumber(Vector2d position)
     {
         return position.x + position.y * this.width;
     }

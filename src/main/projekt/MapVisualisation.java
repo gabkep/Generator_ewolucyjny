@@ -11,6 +11,8 @@ import java.util.Iterator;
 public class MapVisualisation extends JPanel implements MouseListener {
     private WorldMap map;
     private SimulationEngine simulationEngine;
+    private int pixelHeight;
+    private int pixelWidth;
 
     public MapVisualisation(WorldMap map, SimulationEngine simulationEngine)
     {
@@ -23,8 +25,8 @@ public class MapVisualisation extends JPanel implements MouseListener {
         super.paintComponent(g);
         this.setSize(simulationEngine.frame.getWidth()/2, simulationEngine.frame.getHeight());
         this.setLocation(this.simulationEngine.frame.getWidth()/2,0);
-        int pixelHeight = (int)Math.round((double)this.getHeight() / (double)map.height);
-        int pixelWidth = (int)Math.round((double)this.getWidth() / (double)map.width);
+        this.pixelHeight = (int)Math.round((double)this.getHeight() / (double)map.height);
+        this.pixelWidth = (int)Math.round((double)this.getWidth() / (double)map.width);
         g.setColor(new Color(225, 252, 189));
         g.fillRect(0,0,this.getWidth(),this.getHeight());
         g.setColor(new Color(173, 252, 68));
@@ -51,10 +53,21 @@ public class MapVisualisation extends JPanel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
-        Vector2d position;
-        int x = 0;
-        int y = 0;
-        position = new Vector2d(x,y);
+        if (simulationEngine.isStopped) {
+            Vector2d position;
+            int x = mouseEvent.getX() / this.pixelWidth;
+            int y = mouseEvent.getY() /this.pixelHeight;
+            if (x < map.width && y < map.height) {
+                position = new Vector2d(x, y);
+                if (map.isOccupied(position)) {
+                    ArrayList<Animal> list = map.elements.get(map.positionNumber(position));
+                    Collections.sort(list,Collections.reverseOrder());
+                    simulationEngine.statsPanel.trackedAnimal = list.get(0);
+                }
+            } else {
+                simulationEngine.statsPanel.trackedAnimal = null;
+            }
+        }
     }
     public void mousePressed(MouseEvent event){}
 

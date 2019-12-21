@@ -15,7 +15,7 @@ public class Animal implements Comparable{
     private List<IPositionChangeObserver> observers;
     private int daysAlive;
     public int childrenCount;
-    private int dayOfDeath;
+    public int dayOfDeath;
 
     public Animal(WorldMap map, Vector2d initialPosition, int startEnergy) {
         this.position = initialPosition;
