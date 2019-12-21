@@ -18,6 +18,7 @@ public class MapVisualisation extends JPanel implements MouseListener {
     {
         this.map = map;
         this.simulationEngine = simulationEngine;
+        addMouseListener(this);
     }
 
     @Override
@@ -57,6 +58,8 @@ public class MapVisualisation extends JPanel implements MouseListener {
             Vector2d position;
             int x = mouseEvent.getX() / this.pixelWidth;
             int y = mouseEvent.getY() /this.pixelHeight;
+            System.out.println(x);
+            System.out.println(y);
             if (x < map.width && y < map.height) {
                 position = new Vector2d(x, y);
                 if (map.isOccupied(position)) {
